@@ -1,0 +1,103 @@
+<h2>Rust Tutorial</h2>
+
+<p>These are the tutorial slides and exercises that were given at <strong>BoosterConf 2017</strong>.
+Before you finish, please let me know what you thought at this
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdpcoeZHXSOmEOyp13KzOSZHoEdieI7UWDB3ulQ-VnnK4WhUw/viewform?usp=sf_link">Google form</a> --
+your feedback helps me to improve the tutorials for others. Thanks. -- Jan-Erik</p>
+
+<p>FYI: This page is at <a href="http://hellorust.com/booster">http://hellorust.com/booster</a>.</p>
+
+<p><a href="http://hellorust.com/booster/slides">Slides are available online</a></p>
+
+<p>Important links:</p>
+
+<ul>
+<li><a href="https://doc.rust-lang.org/std/">Rust Standard Library Documentation</a></li>
+<li><a href="https://community.rs/resources/">Community Resources</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/">The Rust Programming Language (Book), v1</a></li>
+<li><a href="http://rust-lang.github.io/book/second-edition/index.html">The Rust Programming Language (Book), v2 (incomplete)</a></li>
+</ul>
+
+<h3>Intro</h3>
+
+<ul>
+<li><a href="install.html">Installation</a></li>
+<li><a href="https://play.rust-lang.org/?code=%2F%2F+Goals%3A%0A%2F%2F+-+change+to+greet+you+by+name%0A%2F%2F+-+introduce+a+variable+%60name%60+and+insert+this+into+the+format+string%0A%2F%2F+-+try+%60println%21%28%22%7B%7D%22%2C+name%29%60+vs+%60println%21%28%22%7B%3A%3F%7D%22%2C+name%29%60+and+see+what+the+difference+is%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+world%21%22%29%3B%0A%7D%0A&version=nightly">Hello World</a>:
+<ul>
+<li>Time: 3 minutes</li>
+</ul></li>
+<li><a href="https://play.rust-lang.org/?code=%2F%2F+Mutable+data+needs+to+be+marked+as+such.%0A%2F%2F%0A%2F%2F+What+is+missing+in+the+example%3F%0Afn+main%28%29+%7B%0A++++let+answer+%3D+42%3B%0A++++answer+%3D+32%3B%0A%7D%0A&version=nightly">Mutability</a>:
+<ul>
+<li>Time: 3 minutes</li>
+</ul></li>
+<li><a href="https://play.rust-lang.org/?code=%2F%2F+Run+this+code+once+in+debug+mode%0A%2F%2F+and+once+in+release+mode.%0A%2F%2F+What+is+the+difference%3F+Why+is+it+happening%3F%0A%2F%2F%0A%2F%2F+Change+the+code+to+get+the+right+result+for+the+sum.%0Afn+main%28%29+%7B%0A++++let+foo+%3A+u8+%3D+242%3B%0A++++let+bar+%3A+u8+%3D+20%3B%0A%0A++++let+result+%3D+foo+%2B+bar%3B%0A%0A++++println%21%28%22%7B%7D+%2B+%7B%7D+%3D+%7B%7D%22%2C+foo%2C+bar%2C+result%29%3B%0A%7D%0A&version=nightly">Basic data types</a>:
+<ul>
+<li>Time: 3 minutes</li>
+</ul></li>
+<li><a href="https://play.rust-lang.org/?code=%2F%2F+What+would+be+a+suitable+type+for+addition%3F%0Afn+add%28first%3A+%28%29%2C+second%3A+%28%29%29+-%3E+%28%29+%7B%0A++++first+%2B+second%0A%7D%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+Call+add+with+some+input+and+check+that+it+is+correct%0A++++assert_eq%21%28RESULT%2C+add%28_%2C+_%29%29%3B%0A%7D%0A&version=nightly">Functions</a>:
+<ul>
+<li>Time: 3 minutes</li>
+</ul></li>
+</ul>
+
+<h3>Ownership and Borrowing</h3>
+
+<ul>
+<li><a href="https://play.rust-lang.org/?code=fn+main%28%29+%7B%0A++++let+%28adjective%2C+name%29+%3D+two_words%28%29%3B%0A++++let+name+%3D+format%21%28%22%7B%7D+%7B%7D%22%2C+adjective%2C+name%29%3B%0A++++print_out%28name%29%3B%0A%7D%0A%0Afn+two_words%28%29+-%3E+%28String%2C+String%29+%7B%0A++++%28format%21%28%22fellow%22%29%2C+format%21%28%22Rustaceans%22%29%29%0A%7D%0A%0Afn+remove_vowels%28name%3A+String%29+-%3E+String+%7B%0A++++%2F%2F+Goal+%231%3A+What+is+needed+here+to+make+this+compile%3F%0A++++let+output+%3D+String%3A%3Anew%28%29%3B%0A++++for+c+in+name.chars%28%29+%7B%0A++++++++match+c+%7B%0A++++++++++++%27a%27+%7C+%27e%27+%7C+%27i%27+%7C+%27o%27+%7C+%27u%27+%3D%3E+%7B%0A++++++++++++++++%2F%2F+skip+vowels%0A++++++++++++%7D%0A++++++++++++_+%3D%3E+%7B%0A++++++++++++++++output.push%28c%29%3B%0A++++++++++++%7D%0A++++++++%7D%0A++++%7D%0A++++output%0A%7D%0A%0Afn+print_out%28name%3A+String%29+%7B%0A++++let+devowelized_name+%3D+remove_vowels%28name%29%3B%0A++++println%21%28%22Removing+vowels+yields+%7B%3A%3F%7D%22%2C+devowelized_name%29%3B%0A%0A++++%2F%2F+Goal+%232%3A+What+happens+when+you+uncomment+the+%60println%60+below%3F%0A++++%2F%2F+Can+you+change+the+code+above+so+that+the+code+below+compiles%0A++++%2F%2F+successfully%3F%0A++++%2F%2F%0A++++%2F%2F+println%21%28%22Removing+vowels+from+%7B%3A%3F%7D+yields+%7B%3A%3F%7D%22%2C%0A++++%2F%2F++++++++++name%2C+devowelized_name%29%3B%0A%0A++++%2F%2F+Extra+credit%3A+Can+you+do+it+without+copying+any+data%3F%0A++++%2F%2F+%28Using+only+ownership+transfer%29%0A%7D%0A&version=nightly">Ownership</a>:
+<ul>
+<li>Extra credit: Can you do it without copying any data?</li>
+<li>Time: 10 minutes</li>
+</ul></li>
+<li><a href="https://play.rust-lang.org/?code=pub+fn+main%28%29+%7B%0A++++let+string+%3D+format%21%28%22my+friend%22%29%3B%0A++++greet%28string.clone%28%29%29%3B%0A++++greet%28string%29%3B%0A%7D%0A%0Afn+greet%28name%3A+String%29+%7B%0A++++println%21%28%22Hello%2C+%7B%7D%21%22%2C+name%29%3B%0A%7D%0A%0A%2F%2F+Goal+%231%3A+Convert+%60greet%60+to+use+borrowing%2C+not+ownership%2C+so+that%0A%2F%2F+this+program+executes+without+doing+any+cloning.%0A%2F%2F%0A%2F%2F+Goal+%232%3A+Use+a+subslice+so+that+it+prints+%22Hello%2C+friend%22+instead+of%0A%2F%2F+%22Hello%2C+my+friend%22.%0A&version=nightly">Shared borrows</a>:
+<ul>
+<li>Time: 10 minutes</li>
+</ul></li>
+<li><a href="https://play.rust-lang.org/?code=pub+fn+main%28%29+%7B%0A++++let+%28mut+str1%2C+str2%29+%3D+two_words%28%29%3B%0A++++str1+%3D+join_words%28str1%2C+str2%29%3B%0A++++println%21%28%22concatenated+string+is+%7B%3A%3F%7D%22%2C+str1%29%3B%0A%7D%0A%0Afn+two_words%28%29+-%3E+%28String%2C+String%29+%7B%0A++++%28format%21%28%22fellow%22%29%2C+format%21%28%22Rustaceans%22%29%29%0A%7D%0A%0A%2F%2F%2F+Concatenate+%60suffix%60+onto+the+end+of+%60prefix%60.%0Afn+join_words%28mut+prefix%3A+String%2C+suffix%3A+String%29+-%3E+String+%7B%0A++++prefix.push%28%27+%27%29%3B+%2F%2F+separate+the+words+with+a+space%0A++++for+ch+in+suffix.chars%28%29+%7B%0A++++++++prefix.push%28ch%29%3B%0A++++%7D%0A++++prefix%0A%7D%0A%0A%2F%2F+Challenge%3A+Convert+%60join_words%60+to+use+borrowing%2C+not+ownership.%0A%2F%2F+The+new+function+should+mutate+%60prefix%60+in+place%2C+and+should+not%0A%2F%2F+take+ownership+of+%60suffix%60.%0A%2F%2F%0A%2F%2F+Hint%3A+If+you%27d+like+a+hint+as+to+how+to+proceed%2C+open%0A%2F%2F+%3Chttp%3A%2F%2Fhellorust.com%2Fbooster%2Fhint-mutable-borrow-1.html%3E.%0A%0A%2F%2F+Question%3A+Now+that+you%27ve+converted+%60join_words%60%2C+what+happens+if+you%0A%2F%2F+call+%60join_words%60+using+the+same+string+for+%60prefix%60+and+%60suffix%60%3F%0A%2F%2F+Why%3F%0A&version=nightly">Mutable borrows</a>:
+<ul>
+<li><a href="hint-mutable-borrow-1.html">Hint:</a> Getting the syntax just right can
+be a bit tricky if you've never done any Rust
+before. <a href="hint-mutable-borrow-1.html">If you need a hint, click here</a>.</li>
+<li>Time: 10 minutes</li>
+</ul></li>
+</ul>
+
+<h3>Structs and such</h3>
+
+<ul>
+<li><a href="https://play.rust-lang.org/?code=%23%21%5Ballow%28dead_code%29%5D%0A%0Astruct+Store+%7B%0A++++name%3A+String%2C%0A++++items%3A+Vec%3CItem%3E%2C%0A%7D%0A%0A%23%5Bderive%28Debug%29%5D%0Astruct+Item+%7B%0A++++name%3A+String%2C%0A++++price%3A+f32%2C%0A%7D%0A%0Aimpl+Store+%7B%0A++++fn+new%28name%3A+String%29+-%3E+Store+%7B%0A++++++++Store+%7B%0A++++++++++++name%3A+name%2C%0A++++++++++++items%3A+vec%21%5B%5D%2C%0A++++++++%7D%0A++++%7D%0A%0A++++fn+add_item%28%26mut+self%2C+item%3A+Item%29+%7B%0A++++++++self.items.push%28item%29%3B%0A++++%7D%0A%0A++++fn+price%28%26self%2C+item_name%3A+%26str%29+-%3E+Option%3Cf32%3E+%7B%0A++++++++for+item+in+%26self.items+%7B%0A++++++++++++if+item.name+%3D%3D+item_name+%7B%0A++++++++++++++++return+Some%28item.price%29%3B%0A++++++++++++%7D%0A++++++++%7D%0A++++++++None%0A++++%7D%0A%0A++++fn+total_price%28%26self%2C+shopping_list%3A+%26%5B%26str%5D%29+-%3E+Option%3Cf32%3E+%7B%0A++++++++%2F%2F+Goal%3A+compute+the+total+price+of+all+items+in+the+shopping%0A++++++++%2F%2F+list.+If+any+of+the+options+are+not+present%2C+return+%60None%60.%0A++++++++%2F%2F%0A++++++++%2F%2F+Hint%3A+If+you%27d+like+a+hint+as+to+how+to+proceed%2C+open%0A++++++++%2F%2F+%3Chttp%3A%2F%2Fhellorust.com%2Fbooster%2Fhint-struct-1.html%3E.%0A%0A++++++++Some%280.0%29%0A++++%7D%0A%7D%0A%0Afn+build_store%28%29+-%3E+Store+%7B%0A++++let+mut+store+%3D+Store%3A%3Anew%28format%21%28%22Rustmart%22%29%29%3B%0A++++store.add_item%28Item+%7B+name%3A+format%21%28%22chocolate%22%29%2C+price%3A+5.0+%7D%29%3B%0A++++store.add_item%28Item+%7B+name%3A+format%21%28%22socks%22%29%2C+price%3A+23.0+%7D%29%3B%0A++++store.add_item%28Item+%7B+name%3A+format%21%28%22plush+Mozilla+dinosaur%22%29%2C+price%3A+13.0+%7D%29%3B%0A++++store%0A%7D%0A%0A%23%5Btest%5D%0Afn+total_price%28%29+%7B%0A++++let+store+%3D+build_store%28%29%3B%0A++++let+list+%3D+vec%21%5B%22chocolate%22%2C+%22plush+Mozilla+dinosaur%22%5D%3B%0A++++assert_eq%21%28store.total_price%28%26list%29%2C+Some%2818.0%29%29%3B%0A%7D%0A%0A%23%5Btest%5D%0Afn+total_price_missing%28%29+%7B%0A++++let+store+%3D+build_store%28%29%3B%0A++++let+list+%3D+vec%21%5B%22chocolate%22%2C+%22plush+Mozilla+dinosaur%22%2C+%22fork+and+knife%22%5D%3B%0A++++assert_eq%21%28store.total_price%28%26list%29%2C+None%29%3B%0A%7D%0A%0A&version=nightly">Structs</a>
+<ul>
+<li><a href="hint-struct-1.html">Hint: Here is an outline of what
+the function should do, if you get stuck.</a></li>
+<li>Time: 15 minutes</li>
+</ul></li>
+</ul>
+
+<h3>Advanced</h3>
+
+<p>If you already know Rust, it's time to apply your knowledge.
+Below are some ideas what to approach next.</p>
+
+<ul>
+<li><a href="http://rust-lang.github.io/book/second-edition/ch02-00-guessing-game-tutorial.html">Guessing Game</a>
+<ul>
+<li>A simple interactive game as a hands-on project</li>
+</ul></li>
+<li><a href="http://rust-lang.github.io/book/second-edition/ch12-00-an-io-project.html">greprs - An I/O project</a>
+<ul>
+<li>Buid a minimal version of a text search tool</li>
+</ul></li>
+<li><a href="https://github.com/skade/mailbox/">Mailbox Rust tutorial</a>
+<ul>
+<li>Building a small, networked mailbox program which uses threads and concurrency</li>
+<li>Use the <a href="https://doc.rust-lang.org/std/">Rust documentation</a> to find necessary methods</li>
+</ul></li>
+<li><a href="https://github.com/brson/rust-cookbook">Rust Cookbook</a>
+<ul>
+<li>Add examples on how to use Rust crates</li>
+<li><a href="https://github.com/brson/rust-cookbook/issues/24">Brainstorm list of use cases</a></li>
+</ul></li>
+<li>Build your own little tool!
+<ul>
+<li>Automate some task you do daily</li>
+</ul></li>
+</ul>
